@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
-from torch.utils.tensorboard import SummaryWriter, summary
+from torch.utils.tensorboard.writer import SummaryWriter, summary
 from torchvision import transforms
 from torcheval.metrics import MulticlassAccuracy, MulticlassF1Score, MulticlassPrecision
 # from torcheval.metrics.functional import multiclass_accuracy, multiclass_f1_score
@@ -11,7 +11,7 @@ from torcheval.metrics import MulticlassAccuracy, MulticlassF1Score, MulticlassP
 from spikingjelly.clock_driven import functional
 
 # timm
-from timm.optim.optim_factory import create_optimizer_v2
+from timm.optim._optim_factory import create_optimizer_v2
 from timm.models import create_model, load_checkpoint
 from timm.utils import *
 
@@ -26,9 +26,9 @@ from model import TemporalBlock
 
 from test import test, evaluation
 
-torch.jit.fuser("fuser0")
+# torch.jit.fuser("fuser0")
 os.environ["CUDA_LAUNCH_BLOCKING"] = '1'
-torch.autograd.set_detect_anomaly(True)
+# torch.autograd.set_detect_anomaly(True)
 
 def train_one_epoch(model, data_loader:DataLoader, criterion, optimizer, ratio:float, device:torch.device):
     
